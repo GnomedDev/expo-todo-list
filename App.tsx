@@ -1,17 +1,17 @@
 import { useState } from "react";
+import { observer } from "mobx-react-lite";
 import { Spinner, TamaguiProvider, YStack } from "tamagui";
 
 import { Header } from "./components/Header";
 import { TodoList } from "./components/TodoList";
 import { initializeLibraries } from "./init";
-import { TodoContext, TodoStore } from "./stores/Todo.store";
-import { NewTodoButton } from "./components/NewButton";
-import { observer } from "mobx-react-lite";
+import { TodoContext, newTodoStore } from "./stores/Todo.store";
+import { NewDialog } from "./components/NewDialog";
 
 const { tamaguiConfig } = initializeLibraries();
 
 const ThemedApp = observer(function ThemedApp() {
-  const [store] = useState(() => new TodoStore());
+  const [store] = useState(newTodoStore);
   if (!store.isLoaded) {
     return <Spinner size="large" />;
   }
@@ -21,7 +21,7 @@ const ThemedApp = observer(function ThemedApp() {
       <YStack width="100%">
         <Header />
         <TodoList />
-        <NewTodoButton />
+        <NewDialog />
       </YStack>
     </TodoContext.Provider>
   );
