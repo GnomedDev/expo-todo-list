@@ -1,6 +1,7 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { action, makeAutoObservable } from "mobx";
 import { createContext } from "react";
+import { action, makeAutoObservable } from "mobx";
+
+import { loadFromStorage } from "../gateways/Todo.gateway";
 
 export type Todo = {
   text: string;
@@ -8,13 +9,29 @@ export type Todo = {
 
 export class TodoStore {
   private _todos: Todo[] = [];
+  private _isLoaded: boolean = false;
 
-  constructor(todos: Todo[]) {
-    this._todos = todos;
+  constructor() {
+    this.initialiseTodos();
     makeAutoObservable(this, {
       setTodos: action,
     });
   }
+
+  initialiseTodos = async () => {
+    const todos = await loadFromStorage();
+
+    this.setTodos(todos);
+    this.setIsLoaded(true);
+  };
+
+  get isLoaded() {
+    return this._isLoaded;
+  }
+
+  setIsLoaded = (isLoaded: boolean) => {
+    this._isLoaded = isLoaded;
+  };
 
   get todos() {
     return this._todos;
@@ -30,8 +47,3 @@ export class TodoStore {
 }
 
 export const TodoContext = createContext<TodoStore | undefined>(undefined);
-
-export async function loadFromStorage() {
-  const serializedTodos = await AsyncStorage.getItem("todos");
-  return serializedTodos ? JSON.parse(serializedTodos) : [];
-}
