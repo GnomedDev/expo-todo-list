@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { useContext, useState } from "react";
 import { Button, Dialog, Input, TextArea, VisuallyHidden } from "tamagui";
+import { v4 as newUuidV4 } from "uuid";
 
 import { TodoContext } from "../stores/Todo.store";
 import { NewTodoButton } from "./NewButton";
@@ -33,6 +34,7 @@ export const NewDialog = observer(function NewDialog() {
             <Button
               onPress={() => {
                 const todo = {
+                  id: newUuidV4(),
                   title: title,
                   text: text,
                 };

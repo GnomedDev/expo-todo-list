@@ -1,10 +1,11 @@
+import { initializeLibraries } from "./init";
+
 import { useState } from "react";
 import { observer } from "mobx-react-lite";
 import { Spinner, TamaguiProvider, YStack } from "tamagui";
 
 import { Header } from "./components/Header";
 import { TodoList } from "./components/TodoList";
-import { initializeLibraries } from "./init";
 import { TodoContext, newTodoStore } from "./stores/Todo.store";
 import { NewDialog } from "./components/NewDialog";
 

@@ -6,6 +6,7 @@ import { ITodoGateway, TodoStorageGateway } from "../gateways/Todo.gateway";
 export type Todo = {
   title: string;
   text: string;
+  id: string;
 };
 
 export class TodoStore {

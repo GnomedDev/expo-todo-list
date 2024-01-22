@@ -15,6 +15,7 @@ const ListTodos = observer(function ListTodos() {
 
   return store.todos.map((todo) => (
     <ListItem
+      key={todo.id}
       title={todo.text}
       borderColor="black"
       borderWidth="2px"
