@@ -1,9 +1,8 @@
 import { Text, ListItem, Stack } from "tamagui";
 
-import { TodoStore } from "../stores/Todo.store";
+import { TodoContext, TodoStore } from "../stores/Todo.store";
 import { observer } from "mobx-react-lite";
-
-type Props = { store: TodoStore };
+import { useContext } from "react";
 
 function EmptyTodo() {
   return (
@@ -11,22 +10,26 @@ function EmptyTodo() {
   );
 }
 
-const ListTodos = observer(function ListTodos({ store }: Props) {
+const ListTodos = observer(function ListTodos() {
+  const store = useContext(TodoContext)!;
+
   return store.todos.map((todo) => <ListItem title={todo.text} />);
 });
 
-const TodoContents = observer(function TodoContents({ store }: Props) {
+const TodoContents = observer(function TodoContents() {
+  const store = useContext(TodoContext)!;
+
   if (store.todos.length === 0) {
     return <EmptyTodo />;
   } else {
-    return <ListTodos store={store} />;
+    return <ListTodos />;
   }
 });
 
-export const TodoList = observer(function TodoList({ store }: Props) {
+export const TodoList = observer(function TodoList() {
   return (
     <Stack paddingHorizontal="$3">
-      <TodoContents store={store} />
+      <TodoContents />
     </Stack>
   );
 });

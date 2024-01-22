@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { action, makeAutoObservable } from "mobx";
+import { createContext } from "react";
 
 export type Todo = {
   text: string;
@@ -27,6 +28,8 @@ export class TodoStore {
     this.setTodos([todo, ...this.todos]);
   };
 }
+
+export const TodoContext = createContext<TodoStore | undefined>(undefined);
 
 export async function loadFromStorage() {
   const serializedTodos = await AsyncStorage.getItem("todos");

@@ -6,7 +6,7 @@ import { Header } from "./components/Header";
 import { TodoList } from "./components/TodoList";
 import { initializeLibraries } from "./init";
 import { wrapPromise } from "./utils/wrapSuspendPromise";
-import { TodoStore, loadFromStorage } from "./stores/Todo.store";
+import { TodoContext, TodoStore, loadFromStorage } from "./stores/Todo.store";
 import { NewTodoButton } from "./components/NewButton";
 
 initializeLibraries();
@@ -18,11 +18,13 @@ function LoadedApp() {
   const [store] = useState(() => new TodoStore(todos ?? []));
 
   return (
-    <YStack width="100%">
-      <Header />
-      <TodoList store={store} />
-      <NewTodoButton />
-    </YStack>
+    <TodoContext.Provider value={store}>
+      <YStack width="100%">
+        <Header />
+        <TodoList />
+        <NewTodoButton />
+      </YStack>
+    </TodoContext.Provider>
   );
 }
 
