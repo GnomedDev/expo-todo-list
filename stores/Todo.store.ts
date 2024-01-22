@@ -25,7 +25,7 @@ export class TodoStore {
   };
 
   addTodo = (todo: Todo) => {
-    this.setTodos([todo, ...this.todos]);
+    this._todos.push(todo);
   };
 }
 
