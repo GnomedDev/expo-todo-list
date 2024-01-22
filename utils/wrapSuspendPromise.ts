@@ -29,5 +29,5 @@ export function wrapPromise<T>(promise: Promise<T>, errorVal?: T) {
     }
   };
 
-  return { suspendUntilLoaded: suspendUntilLoaded };
+  return { suspendUntilLoaded };
 }
