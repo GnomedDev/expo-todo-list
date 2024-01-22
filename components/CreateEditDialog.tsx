@@ -79,3 +79,37 @@ export const NewDialog = function NewDialog() {
     />
   );
 };
+
+type EditProps = {
+  itemId: string;
+  trigger: React.FunctionComponent<{ onPress: () => void }>;
+};
+
+export const EditDialog = function EditDialog({ itemId, trigger }: EditProps) {
+  const store = useContext(TodoContext)!;
+
+  return (
+    <BaseDialog
+      dialogTitle="Edit your to-do item."
+      dialogDescription="Enter your text to edit your to-do item."
+      trigger={trigger}
+      onPress={(title, text) => {
+        const editedTodo = {
+          id: itemId,
+          title,
+          text,
+        };
+
+        const editedTodos = store.todos.map((existingTodo) => {
+          if (existingTodo.id == itemId) {
+            return editedTodo;
+          } else {
+            return existingTodo;
+          }
+        });
+
+        store.setTodos(editedTodos);
+      }}
+    />
+  );
+};
