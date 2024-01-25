@@ -1,6 +1,5 @@
-import { config } from "@tamagui/config/v2";
 import { useState } from "react";
-import { Spinner, TamaguiProvider, YStack, createTamagui } from "tamagui";
+import { Spinner, TamaguiProvider, YStack } from "tamagui";
 
 import { Header } from "./components/Header";
 import { TodoList } from "./components/TodoList";
@@ -9,7 +8,7 @@ import { TodoContext, TodoStore } from "./stores/Todo.store";
 import { NewTodoButton } from "./components/NewButton";
 import { observer } from "mobx-react-lite";
 
-initializeLibraries();
+const { tamaguiConfig } = initializeLibraries();
 
 const ThemedApp = observer(function ThemedApp() {
   const [store] = useState(() => new TodoStore());
@@ -29,8 +28,6 @@ const ThemedApp = observer(function ThemedApp() {
 });
 
 export default function App() {
-  const tamaguiConfig = createTamagui(config);
-
   return (
     <TamaguiProvider config={tamaguiConfig}>
       <ThemedApp />
