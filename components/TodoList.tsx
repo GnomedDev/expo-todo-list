@@ -30,7 +30,7 @@ const ListTodos = observer(function ListTodos() {
             <XStack alignContent="center">
               <Text paddingLeft="0.5em">{todo.title}</Text>
               <Spacer />
-              <EditDialog itemId={todo.id} trigger={EditButton} />
+              <EditDialog todo={todo} trigger={EditButton} />
               <Accordion.Trigger>
                 <ChevronDown size="$1" />
               </Accordion.Trigger>

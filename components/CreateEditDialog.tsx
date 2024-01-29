@@ -3,8 +3,9 @@ import { useContext, useState } from "react";
 import { v4 as newUuidV4 } from "uuid";
 import { Button, Dialog, Input, TextArea, VisuallyHidden } from "tamagui";
 
-import { TodoContext } from "../stores/Todo.store";
+import { Todo, TodoContext } from "../stores/Todo.store";
 import { NewTodoButton } from "./NewButton";
+import { runInAction } from "mobx";
 
 type BaseDialogProps = {
   dialogTitle: string;
@@ -39,8 +40,8 @@ const BaseDialog = observer(function BaseDialog({
             <Dialog.Description>{dialogDescription}</Dialog.Description>
           </VisuallyHidden>
 
-          <Input onChangeText={setTitle} />
-          <TextArea onChangeText={setText} />
+          <Input value={title} onChangeText={setTitle} />
+          <TextArea value={text} onChangeText={setText} />
 
           <Dialog.Close asChild>
             <Button
@@ -81,34 +82,27 @@ export const NewDialog = function NewDialog() {
 };
 
 type EditProps = {
-  itemId: string;
+  todo: Todo;
   trigger: React.FunctionComponent<{ onPress: () => void }>;
 };
 
-export const EditDialog = function EditDialog({ itemId, trigger }: EditProps) {
+export const EditDialog = function EditDialog({ todo, trigger }: EditProps) {
   const store = useContext(TodoContext)!;
 
   return (
     <BaseDialog
       dialogTitle="Edit your to-do item."
       dialogDescription="Enter your text to edit your to-do item."
+      defaultTitle={todo.title}
+      defaultText={todo.text}
       trigger={trigger}
       onPress={(title, text) => {
-        const editedTodo = {
-          id: itemId,
-          title,
-          text,
-        };
-
-        const editedTodos = store.todos.map((existingTodo) => {
-          if (existingTodo.id == itemId) {
-            return editedTodo;
-          } else {
-            return existingTodo;
-          }
+        runInAction(() => {
+          todo.text = text;
+          todo.title = title;
         });
 
-        store.setTodos(editedTodos);
+        store.saveTodos();
       }}
     />
   );
