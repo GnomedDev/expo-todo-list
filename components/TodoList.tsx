@@ -13,7 +13,15 @@ function EmptyTodo() {
 const ListTodos = observer(function ListTodos() {
   const store = useContext(TodoContext)!;
 
-  return store.todos.map((todo) => <ListItem title={todo.text} />);
+  return store.todos.map((todo) => (
+    <ListItem
+      key={todo.id}
+      title={todo.text}
+      borderColor="black"
+      borderWidth="2px"
+      borderRadius="1"
+    />
+  ));
 });
 
 const TodoContents = observer(function TodoContents() {
@@ -28,7 +36,7 @@ const TodoContents = observer(function TodoContents() {
 
 export const TodoList = observer(function TodoList() {
   return (
-    <Stack paddingHorizontal="$3">
+    <Stack paddingHorizontal="$3" paddingTop="$1">
       <TodoContents />
     </Stack>
   );

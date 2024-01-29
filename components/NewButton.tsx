@@ -1,7 +1,7 @@
 import { Pencil } from "@tamagui/lucide-icons";
 import { Button, Stack } from "tamagui";
 
-export function NewTodoButton() {
+export function NewTodoButton({ onPress }: { onPress: () => void }) {
   return (
     <Stack
       style={{
@@ -15,7 +15,12 @@ export function NewTodoButton() {
         right: "10px",
       }}
     >
-      <Button icon={<Pencil />}></Button>
+      <Button
+        accessibilityLabel="Create a new to-do!"
+        onPress={onPress}
+        themeInverse
+        icon={<Pencil />}
+      />
     </Stack>
   );
 }
