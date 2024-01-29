@@ -17,6 +17,7 @@ export class TodoStore {
     this.initialiseTodos();
     makeAutoObservable(this, {
       setTodos: action,
+      setIsLoaded: action,
     });
   }
 
@@ -41,11 +42,13 @@ export class TodoStore {
 
   setTodos = (todos: Todo[]) => {
     this._todos = todos;
-    this.gateway.save(todos);
   };
 
   addTodo = (todo: Todo) => {
     this._todos.push(todo);
+  };
+
+  saveTodos = () => {
     this.gateway.save(this.todos);
   };
 }

@@ -40,6 +40,7 @@ export const NewDialog = observer(function NewDialog() {
                 };
 
                 store.addTodo(todo);
+                store.saveTodos();
                 setOpen(false);
               }}
             >
