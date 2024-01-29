@@ -1,6 +1,5 @@
 import { observer } from "mobx-react-lite";
 import { useContext, useState } from "react";
-import { v4 as newUuidV4 } from "uuid";
 import { Button, Dialog, Input, TextArea, VisuallyHidden } from "tamagui";
 
 import { Todo, TodoContext } from "../stores/Todo.store";
@@ -67,16 +66,7 @@ export const NewDialog = function NewDialog() {
       dialogTitle="Create a new to-do!"
       dialogDescription="Enter your text to create a new item to-do."
       trigger={NewTodoButton}
-      onPress={(title, text) => {
-        const todo = {
-          id: newUuidV4(),
-          title: title,
-          text: text,
-        };
-
-        store.addTodo(todo);
-        store.saveTodos();
-      }}
+      onPress={store.newTodo}
     />
   );
 };
@@ -88,6 +78,8 @@ type EditProps = {
 
 export const EditDialog = function EditDialog({ todo, trigger }: EditProps) {
   const store = useContext(TodoContext)!;
+  const onPress = (title: string, text: string) =>
+    store.editTodo(todo, title, text);
 
   return (
     <BaseDialog
@@ -96,14 +88,7 @@ export const EditDialog = function EditDialog({ todo, trigger }: EditProps) {
       defaultTitle={todo.title}
       defaultText={todo.text}
       trigger={trigger}
-      onPress={(title, text) => {
-        runInAction(() => {
-          todo.text = text;
-          todo.title = title;
-        });
-
-        store.saveTodos();
-      }}
+      onPress={onPress}
     />
   );
 };
