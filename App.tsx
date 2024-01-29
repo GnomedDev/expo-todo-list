@@ -3,6 +3,7 @@ import { initializeLibraries } from "./init";
 import { useState } from "react";
 import { observer } from "mobx-react-lite";
 import { Spinner, TamaguiProvider, YStack } from "tamagui";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { Header } from "./components/Header";
 import { TodoList } from "./components/TodoList";
@@ -31,7 +32,9 @@ const ThemedApp = observer(function ThemedApp() {
 export default function App() {
   return (
     <TamaguiProvider config={tamaguiConfig}>
-      <ThemedApp />
+      <SafeAreaProvider>
+        <ThemedApp />
+      </SafeAreaProvider>
     </TamaguiProvider>
   );
 }
