@@ -4,6 +4,7 @@ import { TodoContext } from "../stores/Todo.store";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 import { ChevronDown } from "@tamagui/lucide-icons";
+import { Spacer } from "./Spacer";
 
 function EmptyTodo() {
   return (
@@ -24,11 +25,10 @@ const ListTodos = observer(function ListTodos() {
           borderWidth="0.1em"
         >
           <Accordion.Header>
-            <XStack>
-              <Text paddingLeft="0.5em" alignSelf="center">
-                {todo.title}
-              </Text>
-              <Accordion.Trigger marginLeft="auto">
+            <XStack alignContent="center">
+              <Text paddingLeft="0.5em">{todo.title}</Text>
+              <Spacer />
+              <Accordion.Trigger>
                 <ChevronDown size="$1" />
               </Accordion.Trigger>
             </XStack>
