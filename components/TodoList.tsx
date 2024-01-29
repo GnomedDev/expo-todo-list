@@ -1,9 +1,11 @@
 import { Text, Stack, Accordion, XStack } from "tamagui";
-
-import { TodoContext } from "../stores/Todo.store";
+import { ChevronDown } from "@tamagui/lucide-icons";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
-import { ChevronDown } from "@tamagui/lucide-icons";
+
+import { TodoContext } from "../stores/Todo.store";
+import { EditButton } from "./EditButton";
+import { EditDialog } from "./CreateEditDialog";
 import { Spacer } from "./Spacer";
 
 function EmptyTodo() {
@@ -28,6 +30,7 @@ const ListTodos = observer(function ListTodos() {
             <XStack alignContent="center">
               <Text paddingLeft="0.5em">{todo.title}</Text>
               <Spacer />
+              <EditDialog itemId={todo.id} trigger={EditButton} />
               <Accordion.Trigger>
                 <ChevronDown size="$1" />
               </Accordion.Trigger>
