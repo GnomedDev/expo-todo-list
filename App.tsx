@@ -8,7 +8,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Header } from "./components/Header";
 import { TodoList } from "./components/TodoList";
 import { TodoContext, newTodoStore } from "./stores/Todo.store";
-import { NewDialog } from "./components/NewDialog";
+import { NewDialog } from "./components/CreateEditDialog";
 
 const { tamaguiConfig } = initializeLibraries();
 

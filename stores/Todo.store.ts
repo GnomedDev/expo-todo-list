@@ -1,5 +1,6 @@
 import { createContext } from "react";
-import { action, makeAutoObservable } from "mobx";
+import { action, makeAutoObservable, runInAction } from "mobx";
+import { v4 as newUuidV4 } from "uuid";
 
 import { ITodoGateway, TodoStorageGateway } from "../gateways/Todo.gateway";
 
@@ -16,36 +17,46 @@ export class TodoStore {
   constructor(private gateway: ITodoGateway) {
     this.initialiseTodos();
     makeAutoObservable(this, {
-      setTodos: action,
+      newTodo: action,
+      editTodo: action,
     });
   }
 
   initialiseTodos = async () => {
     const todos = await this.gateway.load();
 
-    this.setTodos(todos);
-    this.setIsLoaded(true);
+    runInAction(() => {
+      this._todos = todos;
+      this._isLoaded = true;
+    });
   };
 
   get isLoaded() {
     return this._isLoaded;
   }
 
-  setIsLoaded = (isLoaded: boolean) => {
-    this._isLoaded = isLoaded;
-  };
-
   get todos() {
     return this._todos;
   }
 
-  setTodos = (todos: Todo[]) => {
-    this._todos = todos;
-    this.gateway.save(todos);
+  newTodo = (title: string, text: string) => {
+    this._todos.push({
+      id: newUuidV4(),
+      title,
+      text,
+    });
+
+    this.saveTodos();
   };
 
-  addTodo = (todo: Todo) => {
-    this._todos.push(todo);
+  editTodo = (todo: Todo, newTitle: string, newText: string) => {
+    todo.title = newTitle;
+    todo.text = newText;
+
+    this.saveTodos();
+  };
+
+  private saveTodos = () => {
     this.gateway.save(this.todos);
   };
 }
