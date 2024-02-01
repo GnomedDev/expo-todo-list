@@ -9,9 +9,9 @@ import { EditButton, DeleteButton } from "./TodoItemButton";
 
 export const TodoItem = observer(function TodoItem({ todo }: { todo: Todo }) {
   return (
-    <XStack>
+    <XStack width="100%" backgroundColor="$white1">
       <CompletedCheck todo={todo} />
-      <SizableText flex={1} alignSelf="center" size="$9">
+      <SizableText flex={1} alignSelf="center" size="$6">
         {todo.title}
       </SizableText>
       <DeleteButton todo={todo} />

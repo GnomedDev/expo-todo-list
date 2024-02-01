@@ -26,9 +26,8 @@ const ListTodos = observer(function ListTodos() {
           borderRightWidth="$1.5"
           borderBottomWidth={index == store.todos.length - 1 ? "$1.5" : "unset"}
         >
-          <Accordion.Header backgroundColor="$white1">
-            <TodoItem todo={todo} />
-          </Accordion.Header>
+          {/* We cannot use Accordion.Header as it breaks width on mobile */}
+          <TodoItem todo={todo} />
           <Accordion.Content
             borderTopWidth="$0.5"
             borderColor="$black1"
