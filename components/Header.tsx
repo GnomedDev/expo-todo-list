@@ -1,5 +1,5 @@
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { H2, Stack } from "tamagui";
+import { H2 } from "tamagui";
 
 export function Header() {
   const insets = useSafeAreaInsets();

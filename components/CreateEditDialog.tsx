@@ -4,7 +4,6 @@ import { Button, Dialog, Input, TextArea, VisuallyHidden } from "tamagui";
 
 import { Todo, TodoContext } from "../stores/Todo.store";
 import { NewTodoButton } from "./NewButton";
-import { runInAction } from "mobx";
 
 type BaseDialogProps = {
   dialogTitle: string;
