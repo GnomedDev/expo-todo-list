@@ -8,6 +8,7 @@ export type Todo = {
   title: string;
   text: string;
   id: string;
+  completed?: boolean;
 };
 
 export class TodoStore {
@@ -52,6 +53,12 @@ export class TodoStore {
   editTodo = (todo: Todo, newTitle: string, newText: string) => {
     todo.title = newTitle;
     todo.text = newText;
+
+    this.saveTodos();
+  };
+
+  editChecked = (todo: Todo, checked: boolean) => {
+    todo.completed = checked;
 
     this.saveTodos();
   };

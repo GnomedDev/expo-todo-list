@@ -7,6 +7,7 @@ import { TodoContext } from "../stores/Todo.store";
 import { EditButton } from "./EditButton";
 import { EditDialog } from "./CreateEditDialog";
 import { Spacer } from "./Spacer";
+import { CompletedCheck } from "./CompletedCheck";
 
 function EmptyTodo() {
   return (
@@ -30,6 +31,7 @@ const ListTodos = observer(function ListTodos() {
             <XStack alignContent="center">
               <Text paddingLeft="0.5em">{todo.title}</Text>
               <Spacer />
+              <CompletedCheck todo={todo} />
               <EditDialog todo={todo} trigger={EditButton} />
               <Accordion.Trigger>
                 <ChevronDown size="$1" />
