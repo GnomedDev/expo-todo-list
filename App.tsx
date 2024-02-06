@@ -26,7 +26,7 @@ const ThemedApp = observer(function ThemedApp() {
 
   return (
     <TodoContext.Provider value={store}>
-      <YStack width="100%">
+      <YStack width="100%" height='100%'>
         <Header />
         <TodoList />
         <NewDialog />
