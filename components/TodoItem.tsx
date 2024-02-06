@@ -10,8 +10,8 @@ import { EditButton } from "./EditButton";
 
 export const TodoItem = observer(function TodoItem({ todo }: { todo: Todo }) {
   return (
-    <XStack alignContent="center">
-      <Text flex={1} paddingLeft="0.5em">
+    <XStack>
+      <Text flex={1} paddingLeft={20}>
         {todo.title}
       </Text>
       <CompletedCheck todo={todo} />
