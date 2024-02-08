@@ -1,4 +1,4 @@
-import { Text, Stack, Accordion, XStack } from "tamagui";
+import { Text, Stack, Accordion } from "tamagui";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 
@@ -16,17 +16,24 @@ const ListTodos = observer(function ListTodos() {
 
   return (
     <Accordion type="multiple">
-      {store.todos.map((todo) => (
+      {store.todos.map((todo, index) => (
         <Accordion.Item
           key={todo.id}
           value={todo.id}
-          borderColor="black"
-          borderWidth="0.1em"
+          borderColor="$black1"
+          borderTopWidth="$1.5"
+          borderLeftWidth="$1.5"
+          borderRightWidth="$1.5"
+          borderBottomWidth={index == store.todos.length - 1 ? "$1.5" : "unset"}
         >
-          <Accordion.Header>
+          <Accordion.Header backgroundColor="$white1">
             <TodoItem todo={todo} />
           </Accordion.Header>
-          <Accordion.Content>
+          <Accordion.Content
+            borderTopWidth="$0.5"
+            borderColor="$black1"
+            backgroundColor="$white1"
+          >
             <Text>{todo.text}</Text>
           </Accordion.Content>
         </Accordion.Item>

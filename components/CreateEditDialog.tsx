@@ -32,7 +32,7 @@ const BaseDialog = observer(function BaseDialog({
         <Trigger onPress={() => setOpen(true)} />
       </Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Content>
+        <Dialog.Content gap="$2" backgroundColor="$white1">
           <Dialog.Title>{dialogTitle}</Dialog.Title>
           <VisuallyHidden>
             <Dialog.Description>{dialogDescription}</Dialog.Description>

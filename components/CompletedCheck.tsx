@@ -13,9 +13,10 @@ export const CompletedCheck = observer(function ({ todo }: { todo: Todo }) {
 
   return (
     <Checkbox
-      size="$8"
+      size="$6"
       alignSelf="center"
-      marginHorizontal="0.5em"
+      borderColor="$black1"
+      marginHorizontal="$4"
       checked={todo.completed ?? false}
       onCheckedChange={onCheckedChange}
     >
