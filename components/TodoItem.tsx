@@ -10,7 +10,7 @@ import { EditButton } from "./EditButton";
 export const TodoItem = observer(function TodoItem({ todo }: { todo: Todo }) {
   return (
       // container should become full width
-    <XStack width='100%' backgroundColor='pink'>
+    <XStack width='100%'>
       <CompletedCheck todo={todo} />
       {/*  of the container's full width text, should be allowed to grow as possible */}
       <SizableText flex={1} alignSelf="center" size="$9">
