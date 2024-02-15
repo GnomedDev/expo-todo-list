@@ -18,7 +18,6 @@ export function NewTodoButton({ onPress }: { onPress: () => void }) {
       <Button
         accessibilityLabel="Create a new to-do!"
         onPress={onPress}
-        themeInverse
         icon={<Pencil />}
       />
     </Stack>

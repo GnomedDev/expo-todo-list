@@ -5,8 +5,14 @@ export function Header() {
   const insets = useSafeAreaInsets();
 
   return (
-    <H2 backgroundColor="grey" textAlign="center" paddingTop={insets.top}>
-      Your TO-DO app
+    <H2
+      textAlign="center"
+      marginTop={insets.top}
+      paddingVertical="$3"
+      backgroundColor="#334e83"
+      color="$white1"
+    >
+      Your TO-DO list
     </H2>
   );
 }
