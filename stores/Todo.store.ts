@@ -20,6 +20,8 @@ export class TodoStore {
     makeAutoObservable(this, {
       newTodo: action,
       editTodo: action,
+      editChecked: action,
+      deleteTodo: action,
     });
   }
 
@@ -59,6 +61,13 @@ export class TodoStore {
 
   editChecked = (todo: Todo, checked: boolean) => {
     todo.completed = checked;
+
+    this.saveTodos();
+  };
+
+  deleteTodo = (todoId: string) => {
+    const index = this._todos.findIndex((todo) => todo.id == todoId);
+    this._todos.splice(index, 1);
 
     this.saveTodos();
   };

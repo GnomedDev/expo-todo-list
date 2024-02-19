@@ -5,7 +5,7 @@ import { ChevronDown } from "@tamagui/lucide-icons";
 import { EditDialog } from "./CreateEditDialog";
 import { CompletedCheck } from "./CompletedCheck";
 import { Todo } from "../stores/Todo.store";
-import { EditButton } from "./EditButton";
+import { EditButton, DeleteButton } from "./TodoItemButton";
 
 export const TodoItem = observer(function TodoItem({ todo }: { todo: Todo }) {
   return (
@@ -14,6 +14,7 @@ export const TodoItem = observer(function TodoItem({ todo }: { todo: Todo }) {
       <SizableText flex={1} alignSelf="center" size="$9">
         {todo.title}
       </SizableText>
+      <DeleteButton todo={todo} />
       <EditDialog todo={todo} trigger={EditButton} />
       <Accordion.Trigger backgroundColor="$white1">
         <ChevronDown size="$1" />
