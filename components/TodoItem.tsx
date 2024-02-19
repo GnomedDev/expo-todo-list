@@ -11,7 +11,12 @@ export const TodoItem = observer(function TodoItem({ todo }: { todo: Todo }) {
   return (
     <XStack width="100%" backgroundColor="$white1">
       <CompletedCheck todo={todo} />
-      <SizableText flex={1} alignSelf="center" size="$6">
+      <SizableText
+        flex={1}
+        size="$6"
+        alignSelf="center"
+        textDecorationLine={todo.completed ? "line-through" : "unset"}
+      >
         {todo.title}
       </SizableText>
       <DeleteButton todo={todo} />
