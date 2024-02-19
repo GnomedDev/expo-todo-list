@@ -6,13 +6,13 @@ export function NewTodoButton({ onPress }: { onPress: () => void }) {
     <Stack
       style={{
         // Defines a bounding box for the button
-        width: "50px",
-        height: "50px",
+        width: 50,
+        height: 50,
         // Fix the position to the viewport, not the page content.
-        position: "fixed",
+        position: "absolute",
         // Move the element to the bottom right, with a little bit of padding.
-        bottom: "10px",
-        right: "10px",
+        bottom: 10,
+        right: 10,
       }}
     >
       <Button

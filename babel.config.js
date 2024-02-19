@@ -8,10 +8,5 @@ module.exports = function (api) {
       ["@babel/plugin-proposal-class-properties", { loose: false }],
       "react-native-reanimated/plugin",
     ],
-    env: {
-      production: {
-        plugins: ["react-native-paper/babel"],
-      },
-    },
   };
 };

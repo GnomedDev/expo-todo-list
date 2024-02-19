@@ -9,18 +9,24 @@ import { Header } from "./components/Header";
 import { TodoList } from "./components/TodoList";
 import { TodoContext, newTodoStore } from "./stores/Todo.store";
 import { NewDialog } from "./components/CreateEditDialog";
+import { useFonts } from "expo-font";
 
 const { tamaguiConfig } = initializeLibraries();
 
 const ThemedApp = observer(function ThemedApp() {
   const [store] = useState(newTodoStore);
-  if (!store.isLoaded) {
+  const [loaded] = useFonts({
+    Inter: require("@tamagui/font-inter/otf/Inter-Medium.otf"),
+    InterBold: require("@tamagui/font-inter/otf/Inter-Bold.otf"),
+  });
+
+  if (!store.isLoaded || !loaded) {
     return <Spinner size="large" />;
   }
 
   return (
     <TodoContext.Provider value={store}>
-      <YStack width="100%">
+      <YStack width="100%" height="100%" backgroundColor="$blue12">
         <Header />
         <TodoList />
         <NewDialog />
