@@ -31,7 +31,8 @@
     "tamagui": "^1.89.26",
     "typescript": "^5.3.3",
     "uuid": "^9.0.1",
-    "expo-dev-client": "~3.3.8"
+    "expo-dev-client": "~3.3.8",
+    "expo-updates": "~0.24.11"
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",
