@@ -38,8 +38,8 @@ const BaseDialog = observer(function BaseDialog({
             <Dialog.Description>{dialogDescription}</Dialog.Description>
           </VisuallyHidden>
 
-          <Input value={title} onChangeText={setTitle} />
-          <TextArea value={text} onChangeText={setText} />
+          <Input defaultValue={title} onChangeText={setTitle} />
+          <TextArea defaultValue={text} onChangeText={setText} />
 
           <Dialog.Close asChild>
             <Button

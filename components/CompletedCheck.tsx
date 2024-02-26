@@ -17,8 +17,8 @@ export const CompletedCheck = observer(function ({ todo }: { todo: Todo }) {
       alignSelf="center"
       borderColor="$black1"
       marginHorizontal="$4"
-      checked={todo.completed ?? false}
       onCheckedChange={onCheckedChange}
+      defaultChecked={todo.completed ?? false}
     >
       <Checkbox.Indicator>
         <Check />
