@@ -3,9 +3,9 @@
     "name": "todo-list",
     "slug": "todo-list",
     "version": "1.0.0",
+    "runtimeVersion": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -34,6 +34,9 @@
       "eas": {
         "projectId": "25e565a2-03ca-40a1-aaa1-cf7f7e8b11df"
       }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/25e565a2-03ca-40a1-aaa1-cf7f7e8b11df"
     }
   }
 }

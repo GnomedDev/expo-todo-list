@@ -5,9 +5,17 @@
           "buildType": "apk"
         },
         "developmentClient": true,
-        "distribution": "internal"
+        "distribution": "internal",
+        "channel": "development"
       },
-      "production": {}
+      "staging": {
+        "android": {
+          "buildType": "apk"
+        },
+        "channel": "staging"
+      },
+      "production": {
+        "channel": "production"
+      }
     }
-  }
-  
+}

@@ -1,0 +1,42 @@
+on:
+  push:
+    branches:
+      - master
+      - add-ci
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+          cache: npm
+
+      - name: Install eas-cli
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Create update
+        run: eas update --branch staging --message "${{ github.event.head_commit.message }}" --non-interactive
+
+  test:
+    runs-on: ubuntu-latest
+    needs: update
+    steps:
+      - name: Run Moropo tests
+        uses: moropo-com/action-trigger-test-run@v2
+        with:
+          api_key: ${{ secrets.MOROPO_API_KEY }}
+          github_token: ${{ secrets.MOROPO_PAT }}
+          scheduled_test_id: ad93f825-28c6-4e3a-b292-aa1598bff74b
+          expo_release_channel: https://u.expo.dev/8b4b5c90-dfa8-4157-b3ca-66f9c2c98ec8?channel-name=1b6efa1a-8a65-4879-a521-8e529b803ffa&platform=android
