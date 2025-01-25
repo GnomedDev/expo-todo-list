@@ -12,10 +12,6 @@ module.exports = function (api) {
           disableExtraction: process.env.NODE_ENV === "development",
         },
       ],
-      ["@babel/plugin-transform-private-property-in-object", { loose: false }],
-      ["@babel/plugin-transform-private-methods", { loose: false }],
-      ["@babel/plugin-proposal-class-properties", { loose: false }],
-      "react-native-reanimated/plugin",
     ],
   };
 };
