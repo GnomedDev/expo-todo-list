@@ -1,9 +1,10 @@
+import { memo } from "react";
 import { Accordion, SizableText, XStack } from "tamagui";
 import { ChevronDown } from "@tamagui/lucide-icons";
 
 import { EditDialog } from "./CreateEditDialog";
 import { CompletedCheck } from "./CompletedCheck";
-import { Todo } from "../reducers/Todo.reducer";
+import { Todo } from "../contexts/Todo.context";
 import { EditButton, DeleteButton } from "./TodoItemButton";
 
 export const TodoItem = ({ todo }: { todo: Todo }) => {

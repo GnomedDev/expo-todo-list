@@ -1,20 +1,18 @@
-import { Text, Stack, Accordion } from "tamagui";
-import { useContext } from "react";
+import { Text, Accordion } from "tamagui";
 
-import { TodoContext } from "../reducers/Todo.reducer";
+import { useTodos } from "../contexts/Todo.context";
 import { TodoItem } from "./TodoItem";
 
-function EmptyTodo() {
-  return (
-    <Text>No to-dos created... make one with the button in the corner!</Text>
-  );
-}
+export const TodoList = () => {
+  const todos = useTodos();
+  if (todos.length === 0) {
+    return (
+      <Text>No to-dos created... make one with the button in the corner!</Text>
+    );
+  }
 
-const ListTodos = function ListTodos() {
-  const { todos } = useContext(TodoContext)!;
-
   return (
-    <Accordion type="multiple">
+    <Accordion type="multiple" paddingHorizontal="$3" paddingTop="$1">
       {todos.map((todo, index) => (
         <Accordion.Item
           key={todo.id}
@@ -39,19 +37,3 @@ const ListTodos = function ListTodos() {
     </Accordion>
   );
 };
-
-const TodoContents = function TodoContents() {
-  const { todos } = useContext(TodoContext)!;
-
-  if (todos.length === 0) {
-    return <EmptyTodo />;
-  } else {
-    return <ListTodos />;
-  }
-};
-
-export const TodoList = () => (
-  <Stack paddingHorizontal="$3" paddingTop="$1">
-    <TodoContents />
-  </Stack>
-);

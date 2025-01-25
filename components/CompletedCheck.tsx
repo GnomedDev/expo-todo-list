@@ -1,11 +1,10 @@
 import { Checkbox } from "tamagui";
-import { useContext } from "react";
 import { Check } from "@tamagui/lucide-icons";
 
-import { Todo, TodoContext } from "../reducers/Todo.reducer";
+import { Todo, useTodoDispatch } from "../contexts/Todo.context";
 
 export const CompletedCheck = ({ todo }: { todo: Todo }) => {
-  const { dispatch } = useContext(TodoContext)!;
+  const dispatch = useTodoDispatch();
   const onCheckedChange = (checked: boolean) => {
     dispatch({ type: "edit", newTodo: { ...todo, completed: checked } });
   };

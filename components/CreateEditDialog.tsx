@@ -1,7 +1,7 @@
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useState } from "react";
 import { Button, Dialog, Input, TextArea, VisuallyHidden } from "tamagui";
 
-import { Todo, TodoContext } from "../reducers/Todo.reducer";
+import { Todo, useTodoDispatch } from "../contexts/Todo.context";
 import { NewTodoButton } from "./NewButton";
 
 type BaseDialogProps = {
@@ -58,7 +58,7 @@ const BaseDialog = ({
 };
 
 export const NewDialog = () => {
-  const { dispatch } = useContext(TodoContext)!;
+  const dispatch = useTodoDispatch();
   const onPress = useCallback(
     (title: string, text: string) => dispatch({ type: "new", title, text }),
     [dispatch]
@@ -80,7 +80,7 @@ type EditProps = {
 };
 
 export const EditDialog = ({ todo, trigger }: EditProps) => {
-  const { dispatch } = useContext(TodoContext)!;
+  const dispatch = useTodoDispatch();
   const onPress = useCallback(
     (title: string, text: string) =>
       dispatch({

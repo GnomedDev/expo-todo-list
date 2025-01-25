@@ -1,8 +1,7 @@
 import { Pencil, Trash } from "@tamagui/lucide-icons";
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import { Button } from "tamagui";
-
-import { TodoContext } from "../reducers/Todo.reducer";
+import { useTodoDispatch } from "../contexts/Todo.context";
 
 type GenericProps = {
   icon: JSX.Element;
@@ -14,7 +13,7 @@ function ItemButton(props: GenericProps) {
   return <Button backgroundColor="$white1" alignSelf="center" {...props} />;
 }
 
-export function EditButton({ onPress }: { onPress: () => void }) {
+export const EditButton = ({ onPress }: { onPress: () => void }) => {
   return (
     <ItemButton
       aria-label="Edit your to-do"
@@ -22,15 +21,18 @@ export function EditButton({ onPress }: { onPress: () => void }) {
       icon={<Pencil />}
     />
   );
-}
+};
 
 export type DeleteProps = {
   id: string;
 };
 
-export const DeleteButton = function DeleteButton({ id }: DeleteProps) {
-  const context = useContext(TodoContext)!;
-  const onPress = () => context.dispatch({ type: "delete", id });
+export const DeleteButton = ({ id }: DeleteProps) => {
+  const dispatch = useTodoDispatch();
+  const onPress = useCallback(
+    () => dispatch({ type: "delete", id }),
+    [dispatch]
+  );
 
   return (
     <ItemButton aria-label="Delete to-do" onPress={onPress} icon={<Trash />} />

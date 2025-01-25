@@ -1,29 +1,25 @@
 import { initializeLibraries } from "./init";
 
-import { useEffect, useMemo, useReducer, useState } from "react";
+import { useEffect, useState } from "react";
 import { Spinner, TamaguiProvider, YStack } from "tamagui";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useFonts } from "expo-font";
 
 import { Header } from "../components/Header";
 import { TodoList } from "../components/TodoList";
-import { Todo, TodoContext, useTodoState } from "../reducers/Todo.reducer";
+import { Todo, TodoProvider } from "../contexts/Todo.context";
 import { NewDialog } from "../components/CreateEditDialog";
 import TodoStorageGateway from "../gateways/Todo.gateway";
 
 const { tamaguiConfig } = initializeLibraries();
 
-const LoadedApp = ({ initialTodos }: { initialTodos: Todo[] }) => {
-  const todoContext = useTodoState(initialTodos);
-
+const LoadedApp = () => {
   return (
-    <TodoContext.Provider value={todoContext}>
-      <YStack width="100%" height="100%" backgroundColor="$blue12">
-        <Header />
-        <TodoList />
-        <NewDialog />
-      </YStack>
-    </TodoContext.Provider>
+    <YStack width="100%" height="100%" backgroundColor="$blue12">
+      <Header />
+      <TodoList />
+      <NewDialog />
+    </YStack>
   );
 };
 
@@ -44,7 +40,11 @@ const ThemedApp = () => {
   }, []);
 
   if (loaded && initialTodos !== undefined) {
-    return <LoadedApp initialTodos={initialTodos} />;
+    return (
+      <TodoProvider initialTodos={initialTodos}>
+        <LoadedApp />
+      </TodoProvider>
+    );
   } else {
     return <Spinner size="large" />;
   }

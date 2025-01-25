@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert } from "react-native";
 
-import { Todo } from "../reducers/Todo.reducer";
+import { Todo } from "../contexts/Todo.context";
 
 import { TODO_STORAGE_KEY } from "../utils/constants";
 
