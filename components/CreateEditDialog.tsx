@@ -87,11 +87,10 @@ export const EditDialog = ({ todo, trigger }: EditProps) => {
     (title: string, text: string) =>
       dispatch({
         type: "edit",
-        newTodo: {
+        id: todo.id,
+        changes: {
           text,
           title,
-          id: todo.id,
-          completed: false,
         },
       }),
     [dispatch, todo.id]

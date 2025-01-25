@@ -1,13 +1,18 @@
 import { Checkbox } from "tamagui";
 import { Check } from "@tamagui/lucide-icons";
 
-import { Todo, useTodoDispatch } from "../contexts/Todo.context";
+import { useTodoDispatch } from "../contexts/Todo.context";
+import { useCallback } from "react";
 
-export const CompletedCheck = ({ todo }: { todo: Todo }) => {
+type Props = { id: string; completed: boolean };
+
+export const CompletedCheck = ({ id, completed }: Props) => {
   const dispatch = useTodoDispatch();
-  const onCheckedChange = (checked: boolean) => {
-    dispatch({ type: "edit", newTodo: { ...todo, completed: checked } });
-  };
+  const onCheckedChange = useCallback(
+    (checked: boolean) =>
+      dispatch({ type: "edit", id, changes: { completed: checked } }),
+    [dispatch, id]
+  );
 
   return (
     <Checkbox
@@ -16,7 +21,7 @@ export const CompletedCheck = ({ todo }: { todo: Todo }) => {
       borderColor="$black1"
       marginHorizontal="$4"
       onCheckedChange={onCheckedChange}
-      defaultChecked={todo.completed ?? false}
+      defaultChecked={completed ?? false}
     >
       <Checkbox.Indicator>
         <Check />

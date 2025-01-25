@@ -18,7 +18,7 @@ export type Todo = {
 
 type TodoAction =
   | { type: "new"; title: string; text: string }
-  | { type: "edit"; newTodo: Todo }
+  | { type: "edit"; id: string; changes: Partial<Todo> }
   | { type: "delete"; id: string };
 
 function todoReducer(oldState: Todo[], action: TodoAction): Todo[] {
@@ -35,7 +35,7 @@ function todoReducer(oldState: Todo[], action: TodoAction): Todo[] {
       ];
     case "edit":
       return oldState.map((todo) =>
-        todo.id === action.newTodo.id ? action.newTodo : todo
+        todo.id === action.id ? { ...todo, ...action.changes } : todo
       );
     case "delete":
       return oldState.filter((todo) => todo.id !== action.id);

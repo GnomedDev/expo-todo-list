@@ -10,7 +10,7 @@ import { EditButton, DeleteButton } from "./TodoItemButton";
 export const TodoItem = memo(({ todo }: { todo: Todo }) => {
   return (
     <XStack width="100%" backgroundColor="$white1">
-      <CompletedCheck todo={todo} />
+      <CompletedCheck id={todo.id} completed={todo.completed} />
       <SizableText
         flex={1}
         size="$6"
