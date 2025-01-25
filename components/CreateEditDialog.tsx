@@ -32,6 +32,7 @@ const BaseDialog = observer(function BaseDialog({
         <Trigger onPress={() => setOpen(true)} />
       </Dialog.Trigger>
       <Dialog.Portal>
+        <Dialog.Overlay opacity={0.5} onPress={() => setOpen(false)} />
         <Dialog.Content gap="$2" backgroundColor="$white1">
           <Dialog.Title>{dialogTitle}</Dialog.Title>
           <VisuallyHidden>
