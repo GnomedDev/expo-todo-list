@@ -5,10 +5,10 @@ import { observer } from "mobx-react-lite";
 import { Spinner, TamaguiProvider, YStack } from "tamagui";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import { Header } from "./components/Header";
-import { TodoList } from "./components/TodoList";
-import { TodoContext, newTodoStore } from "./stores/Todo.store";
-import { NewDialog } from "./components/CreateEditDialog";
+import { Header } from "../components/Header";
+import { TodoList } from "../components/TodoList";
+import { TodoContext, newTodoStore } from "../stores/Todo.store";
+import { NewDialog } from "../components/CreateEditDialog";
 import { useFonts } from "expo-font";
 
 const { tamaguiConfig } = initializeLibraries();
