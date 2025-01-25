@@ -16,7 +16,7 @@ export function NewTodoButton({ onPress }: { onPress: () => void }) {
       }}
     >
       <Button
-        accessibilityLabel="Create a new to-do!"
+        aria-label="Create a new to-do!"
         onPress={onPress}
         icon={<Pencil />}
       />

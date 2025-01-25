@@ -8,25 +8,17 @@ import { Todo, TodoContext } from "../stores/Todo.store";
 type GenericProps = {
   icon: JSX.Element;
   onPress: () => void;
-  accessibilityLabel: string;
+  "aria-label": string;
 };
 
-function ItemButton({ icon, onPress, accessibilityLabel }: GenericProps) {
-  return (
-    <Button
-      accessibilityLabel={accessibilityLabel}
-      backgroundColor="$white1"
-      alignSelf="center"
-      onPress={onPress}
-      icon={icon}
-    />
-  );
+function ItemButton(props: GenericProps) {
+  return <Button backgroundColor="$white1" alignSelf="center" {...props} />;
 }
 
 export function EditButton({ onPress }: { onPress: () => void }) {
   return (
     <ItemButton
-      accessibilityLabel="Edit your to-do"
+      aria-label="Edit your to-do"
       onPress={onPress}
       icon={<Pencil />}
     />
@@ -44,10 +36,6 @@ export const DeleteButton = observer(function DeleteButton({
   const onPress = () => store.deleteTodo(todo.id);
 
   return (
-    <ItemButton
-      accessibilityLabel="Delete to-do"
-      onPress={onPress}
-      icon={<Trash />}
-    />
+    <ItemButton aria-label="Delete to-do" onPress={onPress} icon={<Trash />} />
   );
 });
