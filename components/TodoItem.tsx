@@ -7,7 +7,7 @@ import { CompletedCheck } from "./CompletedCheck";
 import { Todo } from "../contexts/Todo.context";
 import { EditButton, DeleteButton } from "./TodoItemButton";
 
-export const TodoItem = ({ todo }: { todo: Todo }) => {
+export const TodoItem = memo(({ todo }: { todo: Todo }) => {
   return (
     <XStack width="100%" backgroundColor="$white1">
       <CompletedCheck todo={todo} />
@@ -26,4 +26,4 @@ export const TodoItem = ({ todo }: { todo: Todo }) => {
       </Accordion.Trigger>
     </XStack>
   );
-};
+});

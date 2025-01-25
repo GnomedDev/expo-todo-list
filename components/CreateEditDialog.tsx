@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { memo, useCallback, useState } from "react";
 import { Button, Dialog, Input, TextArea, VisuallyHidden } from "tamagui";
 
 import { Todo, useTodoDispatch } from "../contexts/Todo.context";
@@ -13,7 +13,7 @@ type BaseDialogProps = {
   trigger: React.FunctionComponent<{ onPress: () => void }>;
 };
 
-const BaseDialog = ({
+const NonMemoBaseDialog = ({
   dialogTitle,
   dialogDescription,
   defaultTitle,
@@ -56,6 +56,8 @@ const BaseDialog = ({
     </Dialog>
   );
 };
+
+const BaseDialog = memo(NonMemoBaseDialog);
 
 export const NewDialog = () => {
   const dispatch = useTodoDispatch();
