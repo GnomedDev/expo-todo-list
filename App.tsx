@@ -5,11 +5,11 @@ import { Spinner, TamaguiProvider, YStack } from "tamagui";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useFonts } from "expo-font";
 
-import { Header } from "../components/Header";
-import { TodoList } from "../components/TodoList";
-import { Todo, TodoProvider } from "../contexts/Todo.context";
-import { NewDialog } from "../components/CreateEditDialog";
-import TodoStorageGateway from "../gateways/Todo.gateway";
+import { Header } from "./components/Header";
+import { TodoList } from "./components/TodoList";
+import { Todo, TodoProvider } from "./contexts/Todo.context";
+import { NewDialog } from "./components/CreateEditDialog";
+import TodoStorageGateway from "./gateways/Todo.gateway";
 
 const { tamaguiConfig } = initializeLibraries();
 

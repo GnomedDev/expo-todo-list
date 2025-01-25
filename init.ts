@@ -1,6 +1,6 @@
 import { createTamagui } from "tamagui";
 
-import config from "../tamagui.config";
+import config from "./tamagui.config";
 
 // This import is needed before any UUID imports.
 import "react-native-get-random-values";

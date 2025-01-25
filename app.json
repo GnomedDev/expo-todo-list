@@ -26,7 +26,7 @@
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
-    "plugins": ["expo-font", "expo-router"],
+    "plugins": ["expo-font"],
     "extra": {
       "eas": {
         "projectId": "25e565a2-03ca-40a1-aaa1-cf7f7e8b11df"

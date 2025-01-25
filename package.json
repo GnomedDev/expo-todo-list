@@ -1,7 +1,6 @@
 {
   "name": "todo-list",
   "version": "1.0.0",
-  "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -27,7 +26,6 @@
     "typescript": "5.x",
     "uuid": "11.x",
     "expo-dev-client": "~5.0.10",
-    "expo-router": "~4.0.17",
     "react-native-screens": "~4.4.0",
     "expo-linking": "~7.0.4",
     "expo-constants": "~17.0.4",
