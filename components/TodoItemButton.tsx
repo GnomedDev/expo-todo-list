@@ -1,9 +1,8 @@
 import { Pencil, Trash } from "@tamagui/lucide-icons";
 import { useContext } from "react";
 import { Button } from "tamagui";
-import { observer } from "mobx-react-lite";
 
-import { Todo, TodoContext } from "../stores/Todo.store";
+import { TodoContext } from "../reducers/Todo.reducer";
 
 type GenericProps = {
   icon: JSX.Element;
@@ -26,16 +25,14 @@ export function EditButton({ onPress }: { onPress: () => void }) {
 }
 
 export type DeleteProps = {
-  todo: Todo;
+  id: string;
 };
 
-export const DeleteButton = observer(function DeleteButton({
-  todo,
-}: DeleteProps) {
-  const store = useContext(TodoContext)!;
-  const onPress = () => store.deleteTodo(todo.id);
+export const DeleteButton = function DeleteButton({ id }: DeleteProps) {
+  const context = useContext(TodoContext)!;
+  const onPress = () => context.dispatch({ type: "delete", id });
 
   return (
     <ItemButton aria-label="Delete to-do" onPress={onPress} icon={<Trash />} />
   );
-});
+};

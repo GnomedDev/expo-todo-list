@@ -1,31 +1,23 @@
 import { initializeLibraries } from "./init";
 
-import { useState } from "react";
-import { observer } from "mobx-react-lite";
+import { useEffect, useMemo, useReducer, useState } from "react";
 import { Spinner, TamaguiProvider, YStack } from "tamagui";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { useFonts } from "expo-font";
 
 import { Header } from "../components/Header";
 import { TodoList } from "../components/TodoList";
-import { TodoContext, newTodoStore } from "../stores/Todo.store";
+import { Todo, TodoContext, useTodoState } from "../reducers/Todo.reducer";
 import { NewDialog } from "../components/CreateEditDialog";
-import { useFonts } from "expo-font";
+import TodoStorageGateway from "../gateways/Todo.gateway";
 
 const { tamaguiConfig } = initializeLibraries();
 
-const ThemedApp = observer(function ThemedApp() {
-  const [store] = useState(newTodoStore);
-  const [loaded] = useFonts({
-    Inter: require("@tamagui/font-inter/otf/Inter-Medium.otf"),
-    InterBold: require("@tamagui/font-inter/otf/Inter-Bold.otf"),
-  });
-
-  if (!store.isLoaded || !loaded) {
-    return <Spinner size="large" />;
-  }
+const LoadedApp = ({ initialTodos }: { initialTodos: Todo[] }) => {
+  const todoContext = useTodoState(initialTodos);
 
   return (
-    <TodoContext.Provider value={store}>
+    <TodoContext.Provider value={todoContext}>
       <YStack width="100%" height="100%" backgroundColor="$blue12">
         <Header />
         <TodoList />
@@ -33,7 +25,30 @@ const ThemedApp = observer(function ThemedApp() {
       </YStack>
     </TodoContext.Provider>
   );
-});
+};
+
+const ThemedApp = () => {
+  const [loaded] = useFonts({
+    Inter: require("@tamagui/font-inter/otf/Inter-Medium.otf"),
+    InterBold: require("@tamagui/font-inter/otf/Inter-Bold.otf"),
+  });
+
+  const [initialTodos, setInitialTodos] = useState<Todo[]>();
+  const loadState = async () => {
+    const initialTodos = await TodoStorageGateway.load();
+    setInitialTodos(initialTodos);
+  };
+
+  useEffect(() => {
+    loadState();
+  }, []);
+
+  if (loaded && initialTodos !== undefined) {
+    return <LoadedApp initialTodos={initialTodos} />;
+  } else {
+    return <Spinner size="large" />;
+  }
+};
 
 export default function App() {
   return (

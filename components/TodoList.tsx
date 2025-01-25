@@ -1,8 +1,7 @@
 import { Text, Stack, Accordion } from "tamagui";
-import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 
-import { TodoContext } from "../stores/Todo.store";
+import { TodoContext } from "../reducers/Todo.reducer";
 import { TodoItem } from "./TodoItem";
 
 function EmptyTodo() {
@@ -11,12 +10,12 @@ function EmptyTodo() {
   );
 }
 
-const ListTodos = observer(function ListTodos() {
-  const store = useContext(TodoContext)!;
+const ListTodos = function ListTodos() {
+  const { todos } = useContext(TodoContext)!;
 
   return (
     <Accordion type="multiple">
-      {store.todos.map((todo, index) => (
+      {todos.map((todo, index) => (
         <Accordion.Item
           key={todo.id}
           value={todo.id}
@@ -24,7 +23,7 @@ const ListTodos = observer(function ListTodos() {
           borderTopWidth="$1.5"
           borderLeftWidth="$1.5"
           borderRightWidth="$1.5"
-          borderBottomWidth={index == store.todos.length - 1 ? "$1.5" : "unset"}
+          borderBottomWidth={index == todos.length - 1 ? "$1.5" : "unset"}
         >
           {/* We cannot use Accordion.Header as it breaks width on mobile */}
           <TodoItem todo={todo} />
@@ -39,22 +38,20 @@ const ListTodos = observer(function ListTodos() {
       ))}
     </Accordion>
   );
-});
+};
 
-const TodoContents = observer(function TodoContents() {
-  const store = useContext(TodoContext)!;
+const TodoContents = function TodoContents() {
+  const { todos } = useContext(TodoContext)!;
 
-  if (store.todos.length === 0) {
+  if (todos.length === 0) {
     return <EmptyTodo />;
   } else {
     return <ListTodos />;
   }
-});
+};
 
-export const TodoList = observer(function TodoList() {
-  return (
-    <Stack paddingHorizontal="$3" paddingTop="$1">
-      <TodoContents />
-    </Stack>
-  );
-});
+export const TodoList = () => (
+  <Stack paddingHorizontal="$3" paddingTop="$1">
+    <TodoContents />
+  </Stack>
+);

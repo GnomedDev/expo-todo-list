@@ -8,14 +8,6 @@ import "react-native-get-random-values";
 import "expo-dev-client";
 
 export function initializeLibraries() {
-  if (
-    !new (class {
-      x: undefined;
-    })().hasOwnProperty("x")
-  ) {
-    throw new Error("Mobx transpiler is not configured correctly");
-  }
-
   return {
     tamaguiConfig: createTamagui(config),
   };

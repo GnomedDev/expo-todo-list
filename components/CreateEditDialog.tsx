@@ -1,8 +1,7 @@
-import { observer } from "mobx-react-lite";
-import { useContext, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { Button, Dialog, Input, TextArea, VisuallyHidden } from "tamagui";
 
-import { Todo, TodoContext } from "../stores/Todo.store";
+import { Todo, TodoContext } from "../reducers/Todo.reducer";
 import { NewTodoButton } from "./NewButton";
 
 type BaseDialogProps = {
@@ -14,14 +13,14 @@ type BaseDialogProps = {
   trigger: React.FunctionComponent<{ onPress: () => void }>;
 };
 
-const BaseDialog = observer(function BaseDialog({
+const BaseDialog = ({
   dialogTitle,
   dialogDescription,
   defaultTitle,
   defaultText,
   trigger: Trigger,
   onPress,
-}: BaseDialogProps) {
+}: BaseDialogProps) => {
   const [isOpen, setOpen] = useState(false);
   const [title, setTitle] = useState(defaultTitle ?? "");
   const [text, setText] = useState(defaultText ?? "");
@@ -56,17 +55,21 @@ const BaseDialog = observer(function BaseDialog({
       </Dialog.Portal>
     </Dialog>
   );
-});
+};
 
-export const NewDialog = function NewDialog() {
-  const store = useContext(TodoContext)!;
+export const NewDialog = () => {
+  const { dispatch } = useContext(TodoContext)!;
+  const onPress = useCallback(
+    (title: string, text: string) => dispatch({ type: "new", title, text }),
+    [dispatch]
+  );
 
   return (
     <BaseDialog
       dialogTitle="Create a new to-do!"
       dialogDescription="Enter your text to create a new item to-do."
       trigger={NewTodoButton}
-      onPress={store.newTodo}
+      onPress={onPress}
     />
   );
 };
@@ -76,10 +79,21 @@ type EditProps = {
   trigger: React.FunctionComponent<{ onPress: () => void }>;
 };
 
-export const EditDialog = function EditDialog({ todo, trigger }: EditProps) {
-  const store = useContext(TodoContext)!;
-  const onPress = (title: string, text: string) =>
-    store.editTodo(todo, title, text);
+export const EditDialog = ({ todo, trigger }: EditProps) => {
+  const { dispatch } = useContext(TodoContext)!;
+  const onPress = useCallback(
+    (title: string, text: string) =>
+      dispatch({
+        type: "edit",
+        newTodo: {
+          text,
+          title,
+          id: todo.id,
+          completed: false,
+        },
+      }),
+    [dispatch, todo.id]
+  );
 
   return (
     <BaseDialog

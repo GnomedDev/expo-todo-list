@@ -17,8 +17,6 @@
     "expo-font": "~13.0.3",
     "expo-linear-gradient": "~14.0.2",
     "expo-status-bar": "~2.0.1",
-    "mobx": "6.x",
-    "mobx-react-lite": "4.x",
     "react": "18.3.1",
     "react-native": "0.76.6",
     "react-native-get-random-values": "~1.11.0",

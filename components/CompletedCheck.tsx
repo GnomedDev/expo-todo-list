@@ -1,14 +1,13 @@
-import { Checkbox, CheckedState } from "tamagui";
+import { Checkbox } from "tamagui";
 import { useContext } from "react";
-import { observer } from "mobx-react-lite";
 import { Check } from "@tamagui/lucide-icons";
 
-import { Todo, TodoContext } from "../stores/Todo.store";
+import { Todo, TodoContext } from "../reducers/Todo.reducer";
 
-export const CompletedCheck = observer(function ({ todo }: { todo: Todo }) {
-  const store = useContext(TodoContext)!;
-  const onCheckedChange = (checked: CheckedState) => {
-    store.editChecked(todo, checked === true);
+export const CompletedCheck = ({ todo }: { todo: Todo }) => {
+  const { dispatch } = useContext(TodoContext)!;
+  const onCheckedChange = (checked: boolean) => {
+    dispatch({ type: "edit", newTodo: { ...todo, completed: checked } });
   };
 
   return (
@@ -25,4 +24,4 @@ export const CompletedCheck = observer(function ({ todo }: { todo: Todo }) {
       </Checkbox.Indicator>
     </Checkbox>
   );
-});
+};
