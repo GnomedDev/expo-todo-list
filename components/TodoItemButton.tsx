@@ -1,5 +1,5 @@
 import { Pencil, Trash } from "@tamagui/lucide-icons";
-import { memo, useCallback, useContext } from "react";
+import { memo, useCallback } from "react";
 import { Button } from "tamagui";
 import { useTodoDispatch } from "../contexts/Todo.context";
 
@@ -23,11 +23,11 @@ export const EditButton = ({ onPress }: { onPress: () => void }) => {
   );
 };
 
-export const DeleteButton = memo(({ id }: { id: string }) => {
+export const DeleteButton = memo(function DeleteButton({ id }: { id: string }) {
   const dispatch = useTodoDispatch();
   const onPress = useCallback(
     () => dispatch({ type: "delete", id }),
-    [dispatch]
+    [dispatch, id]
   );
 
   return (

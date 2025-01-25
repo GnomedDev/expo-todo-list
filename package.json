@@ -5,7 +5,8 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.x",
@@ -33,7 +34,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",
-    "@types/react": "~18.2.79"
+    "@types/react": "~18.2.79",
+    "eslint": "^8.57.0",
+    "eslint-config-expo": "~8.0.1"
   },
   "private": true
 }

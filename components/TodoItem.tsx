@@ -7,7 +7,7 @@ import { CompletedCheck } from "./CompletedCheck";
 import { Todo } from "../contexts/Todo.context";
 import { EditButton, DeleteButton } from "./TodoItemButton";
 
-export const TodoItem = memo(({ todo }: { todo: Todo }) => {
+export const TodoItem = memo(function TodoItem({ todo }: { todo: Todo }) {
   return (
     <XStack width="100%" backgroundColor="$white1">
       <CompletedCheck id={todo.id} completed={todo.completed} />

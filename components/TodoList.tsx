@@ -21,7 +21,7 @@ export const TodoList = () => {
           borderTopWidth="$1.5"
           borderLeftWidth="$1.5"
           borderRightWidth="$1.5"
-          borderBottomWidth={index == todos.length - 1 ? "$1.5" : "unset"}
+          borderBottomWidth={index === todos.length - 1 ? "$1.5" : "unset"}
         >
           {/* We cannot use Accordion.Header as it breaks width on mobile */}
           <TodoItem todo={todo} />
