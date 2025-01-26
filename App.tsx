@@ -46,7 +46,7 @@ const ThemedApp = () => {
       </TodoProvider>
     );
   } else {
-    return <Spinner size="large" />;
+    return <Spinner size="large" position="absolute" left="50%" top="50%" />;
   }
 };
 
